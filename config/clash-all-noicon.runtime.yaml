@@ -1,0 +1,1006 @@
+---
+proxy-providers:
+  forest:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/forest"
+  牛逼:
+    url: https://api6.nimenshishangdi.cc/dazhutou/1f91592194aef0b22982b44975b8f533
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/牛逼"
+  haiyu:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/haiyu"
+  ikuu:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/ikuu"
+  旺仔:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/旺仔"
+  cfnext-1:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/cfnext-1"
+  cfnext-2:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/cfnext-2"
+  cfnext-3:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/cfnext-3"
+  cfnext-4:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/cfnext-4"
+  cfnext-5:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/cfnext-5"
+  edgetunnel:
+    url: "<REDACTED_SUBSCRIBE_URL>"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/edgetunnel"
+  Kitty:
+    url: https://m1.tohno-1.top/oosaka/f34b5559ebc16ad8e0a26ced1d2813b1
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    path: "./proxy_provider/Kitty"
+proxies:
+- name: 直连
+  type: direct
+- name: 拒绝
+  type: reject
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+external-ui: "/usr/share/openclash/ui"
+external-ui-name: zashboard
+external-ui-url: https://github.com/wuchen-beifeng/myopenclash/blob/main/dashboard/zashboard-20250417.json
+secret: f032f87443b8bda523d2818b3d4ff6a4
+dns:
+  enable: true
+  listen: 0.0.0.0:7874
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.19.0.1/16
+  nameserver:
+  - dhcp://"pppoe-wan2"
+  - 100.64.0.1
+  - 124.161.116.1
+  - "[fe80::ce1a:faff:feed:af00]:53"
+  - 119.6.6.6
+  - 114.114.114.114
+  - "[2408:8001:7000::]:53"
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+  - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
+  - "*.local"
+  - "*.home.arpa"
+  - "*.direct"
+  - cable.auth.com
+  - network-test.debian.org
+  - detectportal.firefox.com
+  - resolver1.opendns.com
+  - global.turn.twilio.com
+  - global.stun.twilio.com
+  - app.yinxiang.com
+  - injections.adguard.org
+  - localhost.*.weixin.qq.com
+  - "*.blzstatic.cn"
+  - "*.cmpassport.com"
+  - id6.me
+  - open.e.189.cn
+  - opencloud.wostore.cn
+  - id.mail.wo.cn
+  - mdn.open.wo.cn
+  - hmrz.wo.cn
+  - nishub1.10010.com
+  - enrichgw.10010.com
+  - "*.wosms.cn"
+  - "*.jegotrip.com.cn"
+  - "*.icitymobile.mobi"
+  - "*.pingan.com.cn"
+  - "*.cmbchina.com"
+  - "*.10099.com.cn"
+  - "*.microdone.cn"
+  - PDC._msDCS.*.*
+  - DC._msDCS.*.*
+  - GC._msDCS.*.*
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time-ios.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - musicapi.taihe.com
+  - music.taihe.com
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - api-jooxtt.sanook.com
+  - api.joox.com
+  - joox.com
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.xiami.com"
+  - "*.music.migu.cn"
+  - music.migu.cn
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - "+.qq.com"
+  - "+.tencent.com"
+  - "+.srv.nintendo.net"
+  - "*.n.n.srv.nintendo.net"
+  - "+.cdn.nintendo.net"
+  - "+.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.*.xboxlive.com"
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - "+.battle.net"
+  - "+.battlenet.com.cn"
+  - "+.wotgame.cn"
+  - "+.wggames.cn"
+  - "+.wowsgame.cn"
+  - "+.wargaming.net"
+  - proxy.golang.org
+  - stun.*.*
+  - stun.*.*.*
+  - "+.stun.*.*"
+  - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - heartbeat.belkin.com
+  - "*.linksys.com"
+  - "*.linksyssmartwifi.com"
+  - "*.router.asus.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - na.b.g-tun.com
+  - "+.nflxvideo.net"
+  - "*.square-enix.com"
+  - "*.finalfantasyxiv.com"
+  - "*.ffxiv.com"
+  - "*.ff14.sdo.com"
+  - ff.dorado.sdo.com
+  - "*.mcdn.bilivideo.cn"
+  - "+.media.dssott.com"
+  - shark007.net
+  - Mijia Cloud
+  - "+.cmbchina.com"
+  - "+.cmbimg.com"
+  - local.adguard.org
+  - "+.sandai.net"
+  - "+.n0808.com"
+  - "+.uu.163.com"
+  - ps.res.netease.com
+  - "+.pub.3gppnetwork.org"
+  - "+.aichen.fun"
+  - "+.wuchen.fun"
+  - "+.lan"
+  - "+.local"
+  - geosite:cn
+  - "+.km688.ink"
+  - "+.onesubv.site"
+  - "+.oneyyds.online"
+  - "+.fengyyds.site"
+  - "+.onemg.top"
+  - "+.chybinc.com"
+  - "+.invitevp.com"
+  - "+.vp2.us"
+  - "+.xiaoniuyun.cc"
+  - "+.apple-bing.sbs"
+  - "+.bncrcloud.com"
+  - "+.xby01.xyz"
+  - "+.idsduf.com"
+  - "+.66jc.top"
+  - "+.gfw.gg"
+  - "+.moedog.cloud"
+  - "+.ynhtbank.com"
+  - "+.qeayr.cn"
+  - "+.saojc.xyz"
+  - "+.sssyun.xyz"
+  - "+.dler.cloud"
+  - "+.0tk8a3a1q4t94dler.com"
+  - "+.aerianas.top"
+  - "+.gptacg.top"
+  - "+.wxda.net"
+  - rule-set:oc-cn-domain
+  fake-ip-range6: 2001:2::1/64
+  respect-rules: false
+ipv6: true
+tun:
+  enable: true
+  stack: gvisor
+  device: utun
+  dns-hijack:
+  - 127.0.0.1:53
+  endpoint-independent-nat: true
+  auto-route: false
+  auto-detect-interface: false
+  auto-redirect: false
+  strict-route: false
+  disable-icmp-forwarding: false
+profile:
+  store-selected: true
+  store-fake-ip: true
+default:
+  type: select
+  proxies: &1
+  - 直连
+  - 所有-手动
+  - 所有-自动
+  - 香港-自动
+  - 台湾-自动
+  - 日本-自动
+  - 新加坡-自动
+  - 韩国-自动
+  - 美国-自动
+  - 其他-自动
+  - 拒绝
+proxy-groups:
+- name: ChatGPT
+  type: select
+  proxies: *1
+- name: Claude
+  type: select
+  proxies: *1
+- name: Meta AI
+  type: select
+  proxies: *1
+- name: Perplexity
+  type: select
+  proxies: *1
+- name: GitHub
+  type: select
+  proxies: *1
+- name: Telegram
+  type: select
+  proxies: *1
+- name: Twitter(X)
+  type: select
+  proxies: *1
+- name: WhatsApp
+  type: select
+  proxies: *1
+- name: Facebook
+  type: select
+  proxies: *1
+- name: Steam
+  type: select
+  proxies: *1
+- name: Game
+  type: select
+  proxies: *1
+- name: YouTube
+  type: select
+  proxies: *1
+- name: TikTok
+  type: select
+  proxies: *1
+- name: Disney
+  type: select
+  proxies: *1
+- name: Netflix
+  type: select
+  proxies: *1
+- name: HBO
+  type: select
+  proxies: *1
+- name: Spotify
+  type: select
+  proxies: *1
+- name: Crypto
+  type: select
+  proxies: *1
+- name: Amazon
+  type: select
+  proxies: *1
+- name: Apple
+  type: select
+  proxies: *1
+- name: Microsoft
+  type: select
+  proxies: *1
+- name: Google
+  type: select
+  proxies: *1
+- name: Gemini
+  type: select
+  proxies: *1
+- name: Copilot
+  type: select
+  proxies: *1
+- name: Nvidia
+  type: select
+  proxies: *1
+- name: Crunchyroll
+  type: select
+  proxies: *1
+- name: Reddit
+  type: select
+  proxies: *1
+- name: Test
+  type: select
+  proxies: *1
+- name: 国外
+  type: select
+  proxies: *1
+- name: 国内
+  type: select
+  proxies: *1
+- name: 其他
+  type: select
+  proxies: *1
+- name: Block
+  type: select
+  proxies: *1
+- name: 所有-手动
+  type: select
+  include-all: true
+  filter: "^((?!(直连|拒绝)).)*$"
+- name: 所有-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "^((?!(直连|拒绝)).)*$"
+  url: https://www.gstatic.com/generate_204
+- name: 香港-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "(?=.*(港岛茶记|广港|香港|HK|Hong Kong|\U0001F1ED\U0001F1F0|HongKong)).*$"
+  url: https://www.gstatic.com/generate_204
+- name: 台湾-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "(?=.*(宝岛正妹|广台|台湾|台灣|TW|Tai Wan|\U0001F1F9\U0001F1FC|\U0001F1E8\U0001F1F3|TaiWan|Taiwan)).*$"
+  url: https://www.gstatic.com/generate_204
+- name: 日本-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "(?=.*(小日本儿|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|\U0001F1EF\U0001F1F5|Japan)).*$"
+  url: https://www.gstatic.com/generate_204
+- name: 新加坡-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "(?=.*(印加坡县|广新|新加坡|SG|坡|狮城|\U0001F1F8\U0001F1EC|Singapore)).*$"
+  url: https://www.gstatic.com/generate_204
+- name: 韩国-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "(?=.*(泡菜欧巴|广韩|韩国|韓國|KR|首尔|春川|\U0001F1F0\U0001F1F7|Korea)).*$"
+  url: https://www.gstatic.com/generate_204
+- name: 美国-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "(?=.*(战争贩子|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|\U0001F1FA\U0001F1F8|United
+    States)).*$"
+  url: https://www.gstatic.com/generate_204
+- name: 其他-自动
+  type: url-test
+  include-all: true
+  tolerance: 100
+  interval: 300
+  filter: "^((?!(战争贩子|泡菜欧巴|印加坡县|小日本儿|宝岛正妹|港岛茶记|直连|拒绝|广港|香港|HK|Hong Kong|\U0001F1ED\U0001F1F0|HongKong|广台|台湾|台灣|TW|Tai
+    Wan|\U0001F1F9\U0001F1FC|\U0001F1E8\U0001F1F3|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|\U0001F1EF\U0001F1F5|Japan|广新|新加坡|SG|坡|狮城|\U0001F1F8\U0001F1EC|Singapore|广韩|韩国|韓國|KR|首尔|春川|\U0001F1F0\U0001F1F7|Korea|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|\U0001F1FA\U0001F1F8|United
+    States|英国|UK)).)*$"
+  url: https://www.gstatic.com/generate_204
+rules:
+- DOMAIN-SUFFIX,monkeycode-ai.com,DIRECT
+- DOMAIN-SUFFIX,678985211.xyz,DIRECT
+- DOMAIN-SUFFIX,xn--49sq15btnijvp.xn--fiqs8s,DIRECT
+- DOMAIN-SUFFIX,haiyucloud.com,DIRECT
+- DOMAIN-SUFFIX,api6.nimenshishangdi.cc,DIRECT
+- DOMAIN-SUFFIX,mitce.net,DIRECT
+- DOMAIN-SUFFIX,scjxjypx.com,DIRECT
+- DOMAIN-SUFFIX,aichen.fun,DIRECT
+- DOMAIN-SUFFIX,wuchen.fun,DIRECT
+- DOMAIN-SUFFIX,speedtest.im,DIRECT
+- DOMAIN-SUFFIX,gstatic.com,Google
+- DOMAIN-SUFFIX,92yqc126g8qwe6v23n01.haiyucloud.com,DIRECT
+- DOMAIN-SUFFIX,wtjy.com,DIRECT
+- DOMAIN-SUFFIX,smartmidea.net,DIRECT
+- DOMAIN-SUFFIX,scsfadmin.sceeic.cn,DIRECT
+- DOMAIN-SUFFIX,alipan.com,DIRECT
+- DOMAIN-SUFFIX,ingest.sentry.io,DIRECT
+- DOMAIN-SUFFIX,speed.do,DIRECT
+- GEOSITE,category-public-tracker,DIRECT
+- RULE-SET,TEST / Domain,Test
+- RULE-SET,ChatGPT / Domain,ChatGPT
+- RULE-SET,Claude / Domain,Claude
+- RULE-SET,Meta AI / Domain,Meta AI
+- RULE-SET,Perplexity / Domain,Perplexity
+- RULE-SET,GitHub / Domain,GitHub
+- RULE-SET,Telegram / Domain,Telegram
+- RULE-SET,Telegram / IP,Telegram,no-resolve
+- RULE-SET,Twitter / Domain,Twitter(X)
+- RULE-SET,WhatsApp / Domain,WhatsApp
+- RULE-SET,Facebook / Domain,Facebook
+- RULE-SET,Amazon / Domain,Amazon
+- RULE-SET,Apple / Domain,Apple
+- RULE-SET,Apple-CN / Domain,Apple
+- RULE-SET,Microsoft / Domain,Microsoft
+- RULE-SET,OKX / Domain,Crypto
+- RULE-SET,Bybit / Domain,Crypto
+- RULE-SET,Binance / Domain,Crypto
+- RULE-SET,Youtube / Domain,YouTube
+- RULE-SET,TikTok / Domain,TikTok
+- RULE-SET,Netflix / Domain,Netflix
+- RULE-SET,Netflix / IP,Netflix,no-resolve
+- RULE-SET,Disney / Domain,Disney
+- RULE-SET,HBO / Domain,HBO
+- RULE-SET,Spotify / Domain,Spotify
+- RULE-SET,Steam / Domain,Steam
+- RULE-SET,Epic / Domain,Game
+- RULE-SET,EA / Domain,Game
+- RULE-SET,Blizzard / Domain,Game
+- RULE-SET,UBI / Domain,Game
+- RULE-SET,PlayStation / Domain,Game
+- RULE-SET,Nintend / Domain,Game
+- RULE-SET,Gemini / Domain,Gemini
+- RULE-SET,Copilot / Domain,Copilot
+- RULE-SET,Nvidia / Domain,Nvidia
+- RULE-SET,Crunchyroll / Domain,Crunchyroll
+- RULE-SET,Reddit / Domain,Reddit
+- RULE-SET,Block / Domain,REJECT
+- RULE-SET,Google / Domain,Google
+- RULE-SET,Google / IP,Google,no-resolve
+- RULE-SET,Proxy / Domain,国外
+- RULE-SET,Globe / Domain,国外
+- RULE-SET,Direct / Domain,国内
+- RULE-SET,China / Domain,国内
+- RULE-SET,China / IP,国内,no-resolve
+- RULE-SET,Private / Domain,国内
+- PROCESS-NAME,aria2c,DIRECT
+- PROCESS-NAME,BitComet,DIRECT
+- PROCESS-NAME,fdm,DIRECT
+- PROCESS-NAME,NetTransport,DIRECT
+- PROCESS-NAME,qbittorrent,DIRECT
+- PROCESS-NAME,Thunder,DIRECT
+- PROCESS-NAME,transmission-daemon,DIRECT
+- PROCESS-NAME,transmission-qt,DIRECT
+- PROCESS-NAME,uTorrent,DIRECT
+- PROCESS-NAME,WebTorrent,DIRECT
+- PROCESS-NAME,Folx,DIRECT
+- PROCESS-NAME,Transmission,DIRECT
+- PROCESS-NAME,WebTorrent Helper,DIRECT
+- PROCESS-NAME,v2ray,DIRECT
+- PROCESS-NAME,ss-local,DIRECT
+- PROCESS-NAME,ssr-local,DIRECT
+- PROCESS-NAME,ss-redir,DIRECT
+- PROCESS-NAME,ssr-redir,DIRECT
+- PROCESS-NAME,ss-server,DIRECT
+- PROCESS-NAME,trojan-go,DIRECT
+- PROCESS-NAME,xray,DIRECT
+- PROCESS-NAME,hysteria,DIRECT
+- PROCESS-NAME,singbox,DIRECT
+- PROCESS-NAME,UUBooster,DIRECT
+- PROCESS-NAME,uugamebooster,DIRECT
+- DST-PORT,80,其他
+- DST-PORT,443,其他
+- MATCH,DIRECT
+rule-anchor:
+  ip:
+    type: http
+    interval: 86400
+    behavior: ipcidr
+    format: mrs
+  domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+  class:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+rule-providers:
+  TEST / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/Check.list
+    path: "./rule_provider/TEST / Domain"
+  ChatGPT / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs
+    path: "./rule_provider/ChatGPT / Domain"
+  Claude / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Claude/Claude.list
+    path: "./rule_provider/Claude / Domain"
+  Meta AI / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/MetaAi.list
+    path: "./rule_provider/Meta AI / Domain"
+  Perplexity / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.mrs
+    path: "./rule_provider/Perplexity / Domain"
+  Copilot / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/Copilot.list
+    path: "./rule_provider/Copilot / Domain"
+  Gemini / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/Gemini.list
+    path: "./rule_provider/Gemini / Domain"
+  GitHub / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs
+    path: "./rule_provider/GitHub / Domain"
+  Telegram / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs
+    path: "./rule_provider/Telegram / Domain"
+  Telegram / IP:
+    type: http
+    interval: 86400
+    behavior: ipcidr
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs
+    path: "./rule_provider/Telegram / IP"
+  Twitter / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/x.mrs
+    path: "./rule_provider/Twitter / Domain"
+  WhatsApp / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Whatsapp/Whatsapp.list
+    path: "./rule_provider/WhatsApp / Domain"
+  Facebook / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/facebook.mrs
+    path: "./rule_provider/Facebook / Domain"
+  Amazon / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/amazon.mrs
+    path: "./rule_provider/Amazon / Domain"
+  Apple-CN / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-cn.mrs
+    path: "./rule_provider/Apple-CN / Domain"
+  Apple / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs
+    path: "./rule_provider/Apple / Domain"
+  Microsoft / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs
+    path: "./rule_provider/Microsoft / Domain"
+  OKX / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/okx.mrs
+    path: "./rule_provider/OKX / Domain"
+  Bybit / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bybit.mrs
+    path: "./rule_provider/Bybit / Domain"
+  Binance / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/binance.mrs
+    path: "./rule_provider/Binance / Domain"
+  TikTok / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs
+    path: "./rule_provider/TikTok / Domain"
+  Netflix / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs
+    path: "./rule_provider/Netflix / Domain"
+  Netflix / IP:
+    type: http
+    interval: 86400
+    behavior: ipcidr
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs
+    path: "./rule_provider/Netflix / IP"
+  Disney / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs
+    path: "./rule_provider/Disney / Domain"
+  HBO / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hbo.mrs
+    path: "./rule_provider/HBO / Domain"
+  Spotify / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs
+    path: "./rule_provider/Spotify / Domain"
+  Steam / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs
+    path: "./rule_provider/Steam / Domain"
+  Epic / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Epic/Epic.list
+    path: "./rule_provider/Epic / Domain"
+  EA / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/EA/EA.list
+    path: "./rule_provider/EA / Domain"
+  Blizzard / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Blizzard/Blizzard.list
+    path: "./rule_provider/Blizzard / Domain"
+  UBI / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/UBI/UBI.list
+    path: "./rule_provider/UBI / Domain"
+  PlayStation / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PlayStation/PlayStation.list
+    path: "./rule_provider/PlayStation / Domain"
+  Nintend / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nintendo/Nintendo.list
+    path: "./rule_provider/Nintend / Domain"
+  Proxy / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/Proxy.list
+    path: "./rule_provider/Proxy / Domain"
+  Globe / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list
+    path: "./rule_provider/Globe / Domain"
+  Direct / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/Direct.list
+    path: "./rule_provider/Direct / Domain"
+  China / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs
+    path: "./rule_provider/China / Domain"
+  China / IP:
+    type: http
+    interval: 86400
+    behavior: ipcidr
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs
+    path: "./rule_provider/China / IP"
+  Private / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs
+    path: "./rule_provider/Private / Domain"
+  Block / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/Block.list
+    path: "./rule_provider/Block / Domain"
+  Nvidia / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Nvidia/Nvidia.list
+    path: "./rule_provider/Nvidia / Domain"
+  Crunchyroll / Domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/main/sources/clash/list/Crunchyroll.list
+    path: "./rule_provider/Crunchyroll / Domain"
+  Reddit / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/reddit.mrs
+    path: "./rule_provider/Reddit / Domain"
+  Youtube / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs
+    path: "./rule_provider/Youtube / Domain"
+  Google / Domain:
+    type: http
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs
+    path: "./rule_provider/Google / Domain"
+  Google / IP:
+    type: http
+    interval: 86400
+    behavior: ipcidr
+    format: mrs
+    url: https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs
+    path: "./rule_provider/Google / IP"
+  oc-cn-domain:
+    type: http
+    interval: 43200
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+    path: "./rule_provider/oc-cn-domain.mrs"
+bind-address: "*"
+keep-alive-interval: 15
+keep-alive-idle: 600
+geodata-loader: standard
+tcp-concurrent: true
+unified-delay: true
+geox-url:
+  mmdb: https://testingcf.jsdelivr.net/gh/alecthw/mmdb_china_ip_list@release/lite/Country.mmdb
+  geoip: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
+  geosite: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
+  asn: https://testingcf.jsdelivr.net/gh/xishang0128/geoip@release/GeoLite2-ASN.mmdb
+sniffer:
+  enable: true
+  override-destination: true
+  sniff:
+    QUIC:
+      ports:
+      - 443
+    TLS:
+      ports:
+      - 443
+      - 8443
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+  force-domain:
+  - "+.netflix.com"
+  - "+.nflxvideo.net"
+  - "+.amazonaws.com"
+  - "+.media.dssott.com"
+  skip-domain:
+  - Mijia Cloud
+  - dlg.io.mi.com
+  - "+.oray.com"
+  - "+.sunlogin.net"
+  - "+.push.apple.com"
+  parse-pure-ip: true
+ntp:
+  enable: true
+  server: time.apple.com
+  port: 123
+  interval: 30
+  write-to-system: true

@@ -11,7 +11,7 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/forest"
   牛逼:
-    url: https://api6.nimenshishangdi.cc/dazhutou/1f91592194aef0b22982b44975b8f533
+    url: 
     type: http
     interval: 86400
     health-check:
@@ -111,7 +111,7 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/edgetunnel"
   Kitty:
-    url: https://m1.tohno-1.top/oosaka/f34b5559ebc16ad8e0a26ced1d2813b1
+    url: 
     type: http
     interval: 86400
     health-check:

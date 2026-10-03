@@ -1,6 +1,13 @@
-#'www.baidu.com': '114.114.114.114'
-#'+.internal.crop.com': '10.0.0.1'
-#"_vlmcs._tcp.lan": '127.0.0.1:53'
-#"geosite:category-games@cn": [https://doh.pub/dns-query, 114.114.114.114, 223.5.5.5]
-#"geosite:google": [tls://8.8.4.4, https://1.0.0.1/dns-query]
-#"geosite:cn": [https://doh.pub/dns-query, 114.114.114.114, 223.5.5.5]
+# OpenClash 自定义域名 DNS 策略 -> dns.nameserver-policy
+# 启用条件：uci openclash.config.custom_name_policy='1'
+# 语义：命中规则的域名 *只* 使用这里列出的解析器；未命中的走全局 dns.nameserver
+#
+# 国内域名 -> 国内解析器（延迟低、返回的 CN IP 准确；CN 域名在 fake-ip-filter 里
+# 所以拿的是真实 IP，分流判定依赖它，必须用国内 DNS）
+"geosite:cn": [119.6.6.6, 114.114.114.114]
+#
+# 按需启用：强制某类境外域名也走加密解析
+# "geosite:geolocation-!cn": [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+# "geosite:google": [https://doh.pub/dns-query]
+# 内网/局域网域名
+# "geosite:private": [223.5.5.5]

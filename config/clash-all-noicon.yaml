@@ -152,7 +152,7 @@ log-level: info
 external-controller: 0.0.0.0:9090
 external-ui: ui
 external-ui-name: zashboard
-external-ui-url: https://github.com/wuchen-beifeng/myopenclash/blob/main/dashboard/zashboard-20250417.json
+external-ui-url: https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
 secret: "123456"
 
 # ========================
@@ -238,37 +238,40 @@ default: &default
 
 proxy-groups:
   - {name: ChatGPT, <<: *default}
+  - {name: Gemini, <<: *default}
+  - {name: GitHub, <<: *default}
+  - {name: YouTube, <<: *default}
+  - {name: Telegram, <<: *default}
+  - {name: TikTok, <<: *default}
+  - {name: Netflix, <<: *default}
+  - {name: Test, <<: *default}
   - {name: Claude, <<: *default}
   - {name: Meta AI, <<: *default}
   - {name: Perplexity, <<: *default}
-  - {name: GitHub, <<: *default}
-  - {name: Telegram, <<: *default}
+  - {name: Google, <<: *default}
+  - {name: 国外, <<: *default}
+  - {name: 国内, <<: *default}
+  - {name: 其他, <<: *default}
+  - {name: Block, <<: *default}
+  - {name: Apple, <<: *default}
+  - {name: Microsoft, <<: *default}
   - {name: Twitter(X), <<: *default}
   - {name: WhatsApp, <<: *default}
   - {name: Facebook, <<: *default}
   - {name: Steam, <<: *default}
   - {name: Game, <<: *default}
-  - {name: YouTube, <<: *default}
-  - {name: TikTok, <<: *default}
+  - {name: Copilot, <<: *default}
   - {name: Disney, <<: *default}
-  - {name: Netflix, <<: *default}
   - {name: HBO, <<: *default}
   - {name: Spotify, <<: *default}
   - {name: Crypto, <<: *default}
   - {name: Amazon, <<: *default}
-  - {name: Apple, <<: *default}
-  - {name: Microsoft, <<: *default}
-  - {name: Google, <<: *default}
-  - {name: Gemini, <<: *default}
-  - {name: Copilot, <<: *default}
   - {name: Nvidia, <<: *default}
   - {name: Crunchyroll, <<: *default}
   - {name: Reddit, <<: *default}
-  - {name: Test, <<: *default}
-  - {name: 国外, <<: *default}
-  - {name: 国内, <<: *default}
-  - {name: 其他, <<: *default}
-  - {name: Block, <<: *default}
+
+
+
   - {name: 所有-手动, type: select, include-all: true, filter: "^((?!(直连|拒绝)).)*$"}
   - {name: 所有-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连|拒绝)).)*$"}
   - {name: 香港-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(港岛茶记|广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"}

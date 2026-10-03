@@ -118,6 +118,51 @@ logread | tail -20 | grep -i openclash
 > - `config/clash-all-noicon.yaml` 中的 `url` 字段在仓库里是 `<REDACTED_SUBSCRIBE_URL>`，推送到路由器前必须替换成你自己的真实订阅地址（含 token）。
 > - 若只更新了部分文件，可跳过 `git pull`，直接把对应文件 `cp` 到路由器即可。
 
+## 通过命令行更新 Zashboard 到路由器
+
+Zashboard 面板通常放在 `/usr/share/openclash/ui/zashboard`。OpenClash 配置中
+`external-ui-url` 指向源码仓库的 `gh-pages` 归档，更新可用命令行一步完成。
+
+```sh
+# 1. 执行前备份
+cp -a /usr/share/openclash/ui/zashboard /usr/share/openclash/ui/zashboard.bak.$(date +%Y%m%d_%H%M%S)
+
+# 2. 下载最新 Zashboard（gh-pages 归档，兼容国内代理）
+cd /tmp
+wget -O zashboard.zip https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
+# 或直接用官方地址（若网络可行）
+# wget -O zashboard.zip https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
+
+# 3. 解压并覆盖
+rm -rf /usr/share/openclash/ui/zashboard
+unzip -q zashboard.zip -d /tmp
+# 归档内部目录名为 zashboard-gh-pages，调整为目标目录
+mv /tmp/zashboard-gh-pages/* /usr/share/openclash/ui/zashboard/
+# 若目录为空（某些发行版解压后为嵌套目录），使用：
+# mkdir -p /usr/share/openclash/ui/zashboard
+# cp -a /tmp/zashboard-gh-pages/* /usr/share/openclash/ui/zashboard/
+
+# 4. 权限与清理
+chown -R root:root /usr/share/openclash/ui/zashboard
+chmod -R 755 /usr/share/openclash/ui/zashboard
+rm -f /tmp/zashboard.zip
+rm -rf /tmp/zashboard-gh-pages
+
+# 5. 重新加载 OpenClash（不需要重启，ui 为静态文件）
+/etc/init.d/openclash reload
+
+# 6. 执行后检查
+ls -la /usr/share/openclash/ui/zashboard/index.html
+curl -s http://localhost:9090/ | head -n 1
+logread | tail -20 | grep -i openclash
+```
+
+补充说明：
+- 确认 UCI 中面板类型：`uci show openclash | grep default_dashboard`，应为 `zashboard`。
+- 若路由器在 `external-ui-url` 中使用 `gh-proxy`，更新配置后 `external-ui-url` 保持为
+  `https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip`。
+- 如需回滚：`rm -rf /usr/share/openclash/ui/zashboard && cp -a /usr/share/openclash/ui/zashboard.bak.* /usr/share/openclash/ui/zashboard && /etc/init.d/openclash reload`。
+
 ## 外部资源本地化
 
 配置中引用的外部规则资源，凡是来自以下两个参考项目的，已下载并保存在

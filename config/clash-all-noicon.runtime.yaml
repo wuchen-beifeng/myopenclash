@@ -1,7 +1,7 @@
 ---
 proxy-providers:
   forest:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
     interval: 86400
     health-check:
@@ -11,7 +11,7 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/forest"
   牛逼:
-    url: 
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
     interval: 86400
     health-check:
@@ -21,7 +21,7 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/牛逼"
   haiyu:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
     interval: 86400
     health-check:
@@ -31,7 +31,7 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/haiyu"
   ikuu:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
     interval: 86400
     health-check:
@@ -41,7 +41,7 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/ikuu"
   旺仔:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
     interval: 86400
     health-check:
@@ -51,9 +51,9 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/旺仔"
   cfnext-1:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
-    interval: 86400
+    interval: 10000
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -61,9 +61,9 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/cfnext-1"
   cfnext-2:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
-    interval: 86400
+    interval: 10010
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -71,9 +71,9 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/cfnext-2"
   cfnext-3:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
-    interval: 86400
+    interval: 10020
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -81,9 +81,9 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/cfnext-3"
   cfnext-4:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
-    interval: 86400
+    interval: 10030
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -91,9 +91,9 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/cfnext-4"
   cfnext-5:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
-    interval: 86400
+    interval: 10040
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -101,9 +101,9 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/cfnext-5"
   edgetunnel:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
-    interval: 86400
+    interval: 10050
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -111,7 +111,7 @@ proxy-providers:
     proxy: 直连
     path: "./proxy_provider/edgetunnel"
   Kitty:
-    url: 
+    url: <REDACTED_SUBSCRIBE_URL>
     type: http
     interval: 86400
     health-check:
@@ -136,7 +136,7 @@ log-level: info
 external-controller: 0.0.0.0:9090
 external-ui: "/usr/share/openclash/ui"
 external-ui-name: zashboard
-external-ui-url: https://github.com/wuchen-beifeng/myopenclash/blob/main/dashboard/zashboard-20250417.json
+external-ui-url: https://codeload.github.com/Zephyruso/zashboard/zip/refs/heads/gh-pages-cdn-fonts
 secret: f032f87443b8bda523d2818b3d4ff6a4
 dns:
   enable: true
@@ -363,6 +363,27 @@ proxy-groups:
 - name: ChatGPT
   type: select
   proxies: *1
+- name: Gemini
+  type: select
+  proxies: *1
+- name: GitHub
+  type: select
+  proxies: *1
+- name: YouTube
+  type: select
+  proxies: *1
+- name: Telegram
+  type: select
+  proxies: *1
+- name: TikTok
+  type: select
+  proxies: *1
+- name: Netflix
+  type: select
+  proxies: *1
+- name: Test
+  type: select
+  proxies: *1
 - name: Claude
   type: select
   proxies: *1
@@ -372,10 +393,25 @@ proxy-groups:
 - name: Perplexity
   type: select
   proxies: *1
-- name: GitHub
+- name: Google
   type: select
   proxies: *1
-- name: Telegram
+- name: 国外
+  type: select
+  proxies: *1
+- name: 国内
+  type: select
+  proxies: *1
+- name: 其他
+  type: select
+  proxies: *1
+- name: Block
+  type: select
+  proxies: *1
+- name: Apple
+  type: select
+  proxies: *1
+- name: Microsoft
   type: select
   proxies: *1
 - name: Twitter(X)
@@ -393,16 +429,10 @@ proxy-groups:
 - name: Game
   type: select
   proxies: *1
-- name: YouTube
-  type: select
-  proxies: *1
-- name: TikTok
+- name: Copilot
   type: select
   proxies: *1
 - name: Disney
-  type: select
-  proxies: *1
-- name: Netflix
   type: select
   proxies: *1
 - name: HBO
@@ -417,21 +447,6 @@ proxy-groups:
 - name: Amazon
   type: select
   proxies: *1
-- name: Apple
-  type: select
-  proxies: *1
-- name: Microsoft
-  type: select
-  proxies: *1
-- name: Google
-  type: select
-  proxies: *1
-- name: Gemini
-  type: select
-  proxies: *1
-- name: Copilot
-  type: select
-  proxies: *1
 - name: Nvidia
   type: select
   proxies: *1
@@ -439,21 +454,6 @@ proxy-groups:
   type: select
   proxies: *1
 - name: Reddit
-  type: select
-  proxies: *1
-- name: Test
-  type: select
-  proxies: *1
-- name: 国外
-  type: select
-  proxies: *1
-- name: 国内
-  type: select
-  proxies: *1
-- name: 其他
-  type: select
-  proxies: *1
-- name: Block
   type: select
   proxies: *1
 - name: 所有-手动

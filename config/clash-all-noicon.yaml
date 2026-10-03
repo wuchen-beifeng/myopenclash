@@ -7,7 +7,7 @@
 proxy-providers:
 
   forest:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
     interval: 86400
     health-check:
@@ -18,7 +18,7 @@ proxy-providers:
 
 
   牛逼:
-    url: ""  
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
     interval: 86400
     health-check:
@@ -29,7 +29,7 @@ proxy-providers:
 
 
   haiyu:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
     interval: 86400
     health-check:
@@ -39,7 +39,7 @@ proxy-providers:
     proxy: 直连
 
   ikuu:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
     interval: 86400
     health-check:
@@ -50,7 +50,7 @@ proxy-providers:
 
 
   旺仔:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
     interval: 86400
     health-check:
@@ -60,9 +60,9 @@ proxy-providers:
     proxy: 直连
 
   cfnext-1:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
-    interval: 86400
+    interval: 10000
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -70,9 +70,9 @@ proxy-providers:
     proxy: 直连
 
   cfnext-2:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
-    interval: 86400
+    interval: 10010
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -81,9 +81,9 @@ proxy-providers:
 
 
   cfnext-3:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
-    interval: 86400
+    interval: 10020
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -91,9 +91,9 @@ proxy-providers:
     proxy: 直连
 
   cfnext-4:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
-    interval: 86400
+    interval: 10030
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -101,9 +101,9 @@ proxy-providers:
     proxy: 直连
 
   cfnext-5:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
-    interval: 86400
+    interval: 10040
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -111,9 +111,9 @@ proxy-providers:
     proxy: 直连
   
   edgetunnel:
-    url: "<REDACTED_SUBSCRIBE_URL>"
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
-    interval: 86400
+    interval: 10050
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -123,7 +123,7 @@ proxy-providers:
 
   
   Kitty:
-    url: ""  
+    url: "<REDACTED_SUBSCRIBE_URL>"  
     type: http
     interval: 86400
     health-check:

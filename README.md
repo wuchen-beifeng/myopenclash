@@ -70,6 +70,54 @@ git add -A && git commit -m "sync openclash config"
 git push
 ```
 
+## 从仓库同步到路由器
+
+当仓库中已有最新配置，需要把变更推送到路由器时，按以下步骤执行。
+推荐在路由器上直接拉取，避免中间拷贝导致格式或换行被破坏。
+
+```sh
+# 1. 确认执行权限
+chmod +x scripts/openclash_custom_firewall_rules.sh
+chmod +x scripts/openclash_custom_overwrite.sh
+
+# 2. 在路由器上克隆仓库（若已克隆则改为 cd 并 git pull）
+git clone https://github.com/wuchen-beifeng/myopenclash /root/myopenclash
+cd /root/myopenclash
+
+# 3. 执行前检查
+git status
+git diff --stat origin/main
+# 确认 config/openclash-uci.conf 中的 dashboard_password 已恢复为你的真实面板密码
+grep "dashboard_password" config/openclash-uci.conf
+# 确认 config/clash-all-noicon.yaml 中的订阅链接已替换为真实地址
+grep "REDACTED" config/*.yaml
+# 确认脚本语法无误
+bash -n scripts/openclash_custom_firewall_rules.sh
+bash -n scripts/openclash_custom_overwrite.sh
+
+# 4. 覆盖配置文件
+cp config/openclash-uci.conf /etc/config/openclash
+cp config/clash-all-noicon.yaml /etc/openclash/config/
+cp config/clash-all-noicon.runtime.yaml /etc/openclash/
+cp rules/* /etc/openclash/custom/
+cp scripts/* /etc/openclash/custom/
+
+# 5. 重新加载 OpenClash（不要直接 restart，先 reload）
+uci commit openclash
+/etc/init.d/openclash reload
+
+# 6. 执行后检查
+uci show openclash | grep -E "dashboard_password|config_path|default_dashboard"
+ls -la /etc/openclash/config/clash-all-noicon.yaml
+/etc/init.d/openclash status
+logread | tail -20 | grep -i openclash
+```
+
+> **注意**
+> - `config/openclash-uci.conf` 中的 `dashboard_password` 为**明文**，仅在局域网面板使用，同步时不要做脱敏处理。
+> - `config/clash-all-noicon.yaml` 中的 `url` 字段在仓库里是 `<REDACTED_SUBSCRIBE_URL>`，推送到路由器前必须替换成你自己的真实订阅地址（含 token）。
+> - 若只更新了部分文件，可跳过 `git pull`，直接把对应文件 `cp` 到路由器即可。
+
 ## 外部资源本地化
 
 配置中引用的外部规则资源，凡是来自以下两个参考项目的，已下载并保存在

@@ -85,6 +85,6 @@
   "config/table-width-mode": "auto",
   "config/topology-apply-connection-filter": "true",
   "config/truncate-proxy-name": "true",
-  "config/two-columns": "false",
+  "config/two-columns": "true",
   "config/use-smart-group-sort": "true"
 }

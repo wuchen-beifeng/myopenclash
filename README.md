@@ -12,9 +12,9 @@ OpenClash 的完整配置：UCI 配置、主配置文件、自定义规则、覆
 myopenclash/
 ├── README.md                  # 本文件
 ├── config/
-│   ├── openclash-uci.conf     # /etc/config/openclash 的 UCI 完整配置（已脱敏）
-│   ├── clash-all-noicon.yaml  # OpenClash 主配置文件（已脱敏、链接已重定向）
-│   ├── clash-all-noicon.runtime.yaml  # 路由器运行时版本（同上）
+│   ├── openclash-uci.conf     # /etc/config/openclash 的 UCI 完整配置（面板密码明文）
+│   ├── clash-all-noicon.yaml  # OpenClash 主配置文件（订阅链接已脱敏）
+│   ├── clash-all-noicon.runtime.yaml  # 路由器运行时版本（订阅链接已脱敏）
 │   └── default-demo.yaml      # OpenClash 默认配置模板
 ├── rules/
 │   ├── openclash_custom_rules.list        # 自定义规则（规则设置 → 自定义规则）
@@ -29,12 +29,9 @@ myopenclash/
 │   ├── openclash_custom_firewall_rules.sh  # 自定义防火墙规则钩子
 │   └── openclash_custom_overwrite.sh       # 自定义覆写脚本
 ├── dashboard/
-│   ├── zashboard-20250417.json             # Zashboard 面板配置
+│   ├── wuchen-dashboard-settings.json      # Zashboard 面板配置（v3.29 迁移版）
+│   ├── zashboard-20250417.json             # Zashboard 面板历史配置
 │   └── ange-clashboard-settings.json       # 另一份面板配置
-└── sources/
-    ├── little/    # 源项目 https://github.com/liandu2024/little 完整快照
-    ├── clash/     # 源项目 https://github.com/liandu2024/clash 完整快照
-    └── REPO_SOURCE.md  # 各来源仓库的出处说明
 ```
 
 ## 同步方式
@@ -56,19 +53,6 @@ cp /root/myopenclash/scripts/* /etc/openclash/custom/
 ```
 
 > 上传到路由器前，请把 `external-ui-url` 与订阅链接恢复为你自己的真实地址。
-
-### 从路由器上传
-
-```sh
-# 在路由器上执行
-cd /root/myopenclash
-cp /etc/config/openclash config/openclash-uci.conf
-cp /etc/openclash/config/clash-all-noicon.yaml config/
-cp /etc/openclash/custom/* rules/
-cp /etc/openclash/custom/*.sh scripts/
-git add -A && git commit -m "sync openclash config"
-git push
-```
 
 ## 从仓库同步到路由器
 
@@ -162,6 +146,44 @@ logread | tail -20 | grep -i openclash
 - 若路由器在 `external-ui-url` 中使用 `gh-proxy`，更新配置后 `external-ui-url` 保持为
   `https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip`。
 - 如需回滚：`rm -rf /usr/share/openclash/ui/zashboard && cp -a /usr/share/openclash/ui/zashboard.bak.* /usr/share/openclash/ui/zashboard && /etc/init.d/openclash reload`。
+
+## 下载 Zashboard 配置到本地
+
+仓库中 `dashboard/` 目录保存了面板的本地 JSON 配置，方便离线修改或多设备备份。可通过命令行一次性下载最新配置到本地工作目录：
+
+```sh
+# 1. 创建本地目录
+mkdir -p ~/myopenclash-local/dashboard
+cd ~/myopenclash-local
+
+# 2. 下载 Zashboard 配置（v3.29 迁移版）
+wget -O dashboard/wuchen-dashboard-settings.json \
+  https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/refs/heads/main/dashboard/wuchen-dashboard-settings.json
+
+# 3. 同时下载历史配置备份
+wget -O dashboard/zashboard-20250417.json \
+  https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/refs/heads/main/dashboard/zashboard-20250417.json
+
+wget -O dashboard/ange-clashboard-settings.json \
+  https://raw.githubusercontent.com/wuchen-beifeng/myopenclash/refs/heads/main/dashboard/ange-clashboard-settings.json
+
+# 4. 校验文件完整性
+ls -lh dashboard/
+sha256sum dashboard/wuchen-dashboard-settings.json
+
+# 5. 本地修改后可推回仓库（仅当你拥有写权限）
+git init
+git remote add origin https://github.com/wuchen-beifeng/myopenclash.git
+git checkout -b local-edit
+git add dashboard/wuchen-dashboard-settings.json
+git commit -m "local: update zashboard settings"
+git push -u origin local-edit
+```
+
+说明：
+- `wuchen-dashboard-settings.json` 为当前使用的 Zashboard v3.29 配置，保持与路由器的面板设置一致。
+- 下载时请使用 `raw.githubusercontent.com` 链接，避免通过 GitHub Web 页面下载到 HTML。
+- 修改前建议先备份原文件，并使用 JSON 校验工具检查格式。
 
 ## 外部资源本地化
 

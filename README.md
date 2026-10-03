@@ -23,16 +23,46 @@ myopenclash/
 │   ├── openclash_custom_fake_filter.list   # Fake-IP 过滤规则
 │   ├── openclash_custom_fallback_filter.yaml  # Fallback-Filter
 │   ├── openclash_custom_sniffer.yaml       # Sniffer 配置
-│   ├── openclash_custom_domain_dns_policy.list     # 域名 DNS 策略
-│   └── openclash_custom_proxy_server_dns_policy.list  # 代理服务器 DNS 策略
+│   ├── openclash_custom_domain_dns_policy.list     # 域名 DNS 策略（分域解析，见下）
+│   ├── openclash_custom_proxy_server_dns_policy.list  # 代理服务器 DNS 策略
+│   ├── openclash_custom_domain_dns.list    # 域名 DNS（直连域名列表）
+│   ├── openclash_custom_chnroute_pass.list  # 绕过大陆（IPv4）例外域名
+│   ├── openclash_custom_chnroute6_pass.list # 绕过大陆（IPv6）例外域名
+│   ├── openclash_custom_localnetwork_ipv4.list  # 本地网络 IPv4 段
+│   └── openclash_custom_localnetwork_ipv6.list  # 本地网络 IPv6 段
 ├── scripts/
 │   ├── openclash_custom_firewall_rules.sh  # 自定义防火墙规则钩子
-│   └── openclash_custom_overwrite.sh       # 自定义覆写脚本
+│   ├── openclash_custom_overwrite.sh       # 自定义覆写脚本
+│   └── 99-openclash-iprule                 # /etc/hotplug.d/iface/ 钩子：
+│                                           # ifup 后恢复 fwmark 0x162 -> table 354
 ├── dashboard/
 │   ├── wuchen-dashboard-settings.json      # Zashboard 面板配置（v3.29 迁移版）
 │   ├── zashboard-20250417.json             # Zashboard 面板历史配置
 │   └── ange-clashboard-settings.json       # 另一份面板配置
 ```
+
+## DNS 分域解析（当前配置）
+
+`rules/openclash_custom_domain_dns_policy.list` 配合 `uci openclash.config.custom_name_policy='1'`
+生效，OpenClash 会把它 merge 进 `dns.nameserver-policy`：
+
+| 分支 | 匹配 | 解析器 |
+|---|---|---|
+| 国内 | `geosite:cn` | `119.6.6.6`、`114.114.114.114`（明文，CN IP 准确） |
+| 国外 | 其余全部 | `https://doh.pub/dns-query`、`https://cloudflare-dns.com/dns-query` |
+
+引导解析器 `default-nameserver: 223.5.5.5`，仅用于解析 DoH 域名本身。
+全局 `nameserver` 已不再包含任何明文 ISP 解析器（`append_wan_dns='0'`）。
+
+设计要点：
+
+- `fake-ip-filter` 里含 `geosite:cn`，所以**国内域名拿真实 IP**（走直连，答案必须准确），
+  必须用国内 DNS；**国外域名走 fake-ip**，真实解析在代理出口完成，本地根本不查询。
+  因此国外分支实际只服务 `fake-ip-filter` 中显式列出的少数非 CN 域名。
+- 明文 UDP/53 在本线路会被链路上改写：受限域名一律返回黑洞 `2001::1`，
+  所以任何明文解析器都不可信，全局上游只保留 DoH。
+- `dns.alidns.com` 对境外域名返回**错误答案**（`www.google.com` → `31.13.92.37`），
+  已从全局上游移除；`doh.pub` 与 `cloudflare-dns.com` 实测答案正确。
 
 ## 同步方式
 

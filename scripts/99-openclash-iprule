@@ -1,0 +1,11 @@
+#!/bin/sh
+# Restore OpenClash policy-routing rule (fwmark 0x162 -> table 354).
+# mwan3 stop_service deletes every rule with pref 1000-3999 on ifdown/ifup,
+# which silently kills proxied traffic until the next cron guard run.
+[ "$ACTION" = "ifup" ] || exit 0
+[ -n "$(pidof clash)" ] || exit 0
+[ -n "$(ip route show table 354 2>/dev/null)" ] || exit 0
+ip    rule show 2>/dev/null | grep -q 'fwmark 0x162 lookup 354' || ip    rule add fwmark 0x162 table 354 pref 1888
+ip -6 rule show 2>/dev/null | grep -q 'fwmark 0x162 lookup 354' || ip -6 rule add fwmark 0x162 table 354
+logger -t owrt-oc-iprule "ifup $INTERFACE: ensured fwmark 0x162 -> table 354"
+exit 0

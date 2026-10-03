@@ -9,7 +9,6 @@ rules:
 - DOMAIN-SUFFIX,aichen.fun,DIRECT
 - DOMAIN-SUFFIX,wuchen.fun,DIRECT
 - DOMAIN-SUFFIX,speedtest.im,DIRECT
-- DOMAIN-SUFFIX,gstatic.com,Google
 - DOMAIN-SUFFIX,92yqc126g8qwe6v23n01.haiyucloud.com,DIRECT
 - DOMAIN-SUFFIX,wtjy.com,DIRECT
 - DOMAIN-SUFFIX,smartmidea.net,DIRECT

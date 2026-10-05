@@ -12,7 +12,7 @@ proxy-providers:
     interval: 86400
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -23,7 +23,7 @@ proxy-providers:
     interval: 86400
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -34,7 +34,7 @@ proxy-providers:
     interval: 86400
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -44,7 +44,7 @@ proxy-providers:
     interval: 86400
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -55,7 +55,7 @@ proxy-providers:
     interval: 86400
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -65,7 +65,7 @@ proxy-providers:
     interval: 10000
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -75,7 +75,7 @@ proxy-providers:
     interval: 10010
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -86,7 +86,7 @@ proxy-providers:
     interval: 10020
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -96,7 +96,7 @@ proxy-providers:
     interval: 10030
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -106,7 +106,7 @@ proxy-providers:
     interval: 10040
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
   
@@ -116,7 +116,7 @@ proxy-providers:
     interval: 10050
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
   
@@ -128,7 +128,7 @@ proxy-providers:
     interval: 86400
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
     proxy: 直连
 
@@ -329,7 +329,7 @@ proxy-groups:
   - name: 香港-自动
     type: url-test
     include-all: true
-    tolerance: 50
+    tolerance: 30
     interval: 300
     filter: "(?=.*(港岛茶记|广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
 
@@ -352,7 +352,7 @@ proxy-groups:
   - name: 台湾-自动
     type: url-test
     include-all: true
-    tolerance: 50
+    tolerance: 30
     interval: 300
     filter: "(?=.*(宝岛正妹|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
 
@@ -375,7 +375,7 @@ proxy-groups:
   - name: 日本-自动
     type: url-test
     include-all: true
-    tolerance: 50
+    tolerance: 30
     interval: 300
     filter: "(?=.*(小日本儿|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
 
@@ -398,7 +398,7 @@ proxy-groups:
   - name: 新加坡-自动
     type: url-test
     include-all: true
-    tolerance: 50
+    tolerance: 30
     interval: 300
     filter: "(?=.*(印加坡县|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
 
@@ -421,7 +421,7 @@ proxy-groups:
   - name: 韩国-自动
     type: url-test
     include-all: true
-    tolerance: 50
+    tolerance: 30
     interval: 300
     filter: "(?=.*(泡菜欧巴|广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea)).*$"
 
@@ -444,7 +444,7 @@ proxy-groups:
   - name: 美国-自动
     type: url-test
     include-all: true
-    tolerance: 50
+    tolerance: 30
     interval: 300
     filter: "(?=.*(战争贩子|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|xicag|🇺🇸|United States)).*$"
 
@@ -467,7 +467,7 @@ proxy-groups:
   - name: 英国-自动
     type: url-test
     include-all: true
-    tolerance: 50
+    tolerance: 30
     interval: 300
     filter: "(?=.*(英国|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
 

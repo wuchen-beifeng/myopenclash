@@ -133,10 +133,9 @@ tproxy-port: 7895
 allow-lan: true
 mode: rule
 log-level: warning
+unified-delay: true
+tcp-concurrent: true
 external-controller: 0.0.0.0:9090
-external-ui: "/usr/share/openclash/ui"
-external-ui-name: zashboard
-external-ui-url: https://codeload.github.com/Zephyruso/zashboard/zip/refs/heads/gh-pages-cdn-fonts
 secret: f032f87443b8bda523d2818b3d4ff6a4
 dns:
   enable: true
@@ -147,6 +146,11 @@ dns:
   nameserver:
   - https://doh.pub/dns-query
   - https://cloudflare-dns.com/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:
+    - gfw
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
   - "*.lan"
@@ -331,6 +335,34 @@ dns:
   default-nameserver:
   - 223.5.5.5
 ipv6: true
+sniffer:
+  enable: true
+  override-destination: true
+  sniff:
+    QUIC:
+      ports:
+      - 443
+    TLS:
+      ports:
+      - 443
+      - 8443
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+  force-domain:
+  - "+.netflix.com"
+  - "+.nflxvideo.net"
+  - "+.amazonaws.com"
+  - "+.media.dssott.com"
+  skip-domain:
+  - Mijia Cloud
+  - dlg.io.mi.com
+  - "+.oray.com"
+  - "+.sunlogin.net"
+  - "+.push.apple.com"
+  parse-pure-ip: true
 tun:
   enable: true
   stack: system
@@ -472,9 +504,9 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "^((?!(直连|拒绝)).)*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 香港-故转
   type: fallback
   interval: 300
@@ -491,9 +523,9 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "(?=.*(港岛茶记|广港|香港|HK|Hong Kong|\U0001F1ED\U0001F1F0|HongKong)).*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 台湾-故转
   type: fallback
   interval: 300
@@ -510,9 +542,9 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "(?=.*(宝岛正妹|广台|台湾|台灣|TW|Tai Wan|\U0001F1F9\U0001F1FC|\U0001F1E8\U0001F1F3|TaiWan|Taiwan)).*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 日本-故转
   type: fallback
   interval: 300
@@ -529,9 +561,9 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "(?=.*(小日本儿|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|\U0001F1EF\U0001F1F5|Japan)).*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 新加坡-故转
   type: fallback
   interval: 300
@@ -548,9 +580,9 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "(?=.*(印加坡县|广新|新加坡|SG|坡|狮城|\U0001F1F8\U0001F1EC|Singapore)).*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 韩国-故转
   type: fallback
   interval: 300
@@ -567,9 +599,9 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "(?=.*(泡菜欧巴|广韩|韩国|韓國|KR|首尔|春川|\U0001F1F0\U0001F1F7|Korea)).*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 美国-故转
   type: fallback
   interval: 300
@@ -587,10 +619,10 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "(?=.*(战争贩子|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|xicag|\U0001F1FA\U0001F1F8|United
     States)).*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 英国-故转
   type: fallback
   interval: 300
@@ -607,9 +639,9 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "(?=.*(英国|伦敦|UK|United Kingdom|\U0001F1EC\U0001F1E7|London)).*$"
-  url: https://cp.cloudflare.com/generate_204
 - name: 其他-故转
   type: fallback
   interval: 300
@@ -628,14 +660,13 @@ proxy-groups:
   type: url-test
   include-all: true
   tolerance: 100
+  url: https://cp.cloudflare.com/generate_204
   interval: 300
   filter: "^((?!(直连|拒绝|港岛茶记|广港|香港|HK|Hong Kong|\U0001F1ED\U0001F1F0|HongKong|宝岛正妹|广台|台湾|台灣|TW|Tai
     Wan|\U0001F1F9\U0001F1FC|\U0001F1E8\U0001F1F3|TaiWan|Taiwan|小日本儿|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|\U0001F1EF\U0001F1F5|Japan|印加坡县|广新|新加坡|SG|坡|狮城|\U0001F1F8\U0001F1EC|Singapore|泡菜欧巴|广韩|韩国|韓國|KR|首尔|春川|\U0001F1F0\U0001F1F7|Korea|战争贩子|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|xicag|\U0001F1FA\U0001F1F8|United
     States|英国|伦敦|UK|United Kingdom|\U0001F1EC\U0001F1E7|London)).)*$"
-  url: https://cp.cloudflare.com/generate_204
 rules:
 - DOMAIN-SUFFIX,monkeycode-ai.com,DIRECT
-- DOMAIN-SUFFIX,678985211.xyz,DIRECT
 - DOMAIN-SUFFIX,xn--49sq15btnijvp.xn--fiqs8s,DIRECT
 - DOMAIN-SUFFIX,haiyucloud.com,DIRECT
 - DOMAIN-SUFFIX,api6.nimenshishangdi.cc,DIRECT
@@ -695,7 +726,7 @@ rules:
 - RULE-SET,Globe / Domain,国外
 - RULE-SET,Direct / Domain,国内
 - RULE-SET,China / Domain,国内
-- RULE-SET,China / IP,国内,no-resolve
+- RULE-SET,China / IP,国内
 - RULE-SET,Private / Domain,国内
 - PROCESS-NAME,aria2c,DIRECT
 - PROCESS-NAME,BitComet,DIRECT
@@ -1069,43 +1100,16 @@ ntp:
   server: time.apple.com
   port: 123
   interval: 30
-  write-to-system: false
+  write-to-system: true
 bind-address: "*"
+external-ui: "/usr/share/openclash/ui"
+external-ui-name: zashboard
+external-ui-url: https://codeload.github.com/Zephyruso/zashboard/zip/refs/heads/gh-pages-cdn-fonts
 keep-alive-interval: 15
 keep-alive-idle: 600
 geodata-loader: standard
-tcp-concurrent: true
-unified-delay: true
 geox-url:
   mmdb: https://github.com/alecthw/mmdb_china_ip_list/releases/latest/download/Country-lite.mmdb
   geoip: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
   geosite: https://fastly.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
   asn: https://fastly.jsdelivr.net/gh/xishang0128/geoip@release/GeoLite2-ASN.mmdb
-sniffer:
-  enable: true
-  override-destination: true
-  sniff:
-    QUIC:
-      ports:
-      - 443
-    TLS:
-      ports:
-      - 443
-      - 8443
-    HTTP:
-      ports:
-      - 80
-      - 8080-8880
-      override-destination: true
-  force-domain:
-  - "+.netflix.com"
-  - "+.nflxvideo.net"
-  - "+.amazonaws.com"
-  - "+.media.dssott.com"
-  skip-domain:
-  - Mijia Cloud
-  - dlg.io.mi.com
-  - "+.oray.com"
-  - "+.sunlogin.net"
-  - "+.push.apple.com"
-  parse-pure-ip: true

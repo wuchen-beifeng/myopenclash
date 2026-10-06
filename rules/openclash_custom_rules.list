@@ -1,6 +1,5 @@
 rules:
 - DOMAIN-SUFFIX,monkeycode-ai.com,DIRECT
-- DOMAIN-SUFFIX,678985211.xyz,DIRECT
 - DOMAIN-SUFFIX,xn--49sq15btnijvp.xn--fiqs8s,DIRECT
 - DOMAIN-SUFFIX,haiyucloud.com,DIRECT
 - DOMAIN-SUFFIX,api6.nimenshishangdi.cc,DIRECT

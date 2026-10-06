@@ -147,12 +147,14 @@ tproxy-port: 7895
 
 allow-lan: true
 mode: rule
-log-level: info
+log-level: warning
+# TLS/连接性能：统一延迟计算，减少不同协议握手差异对自动选节点的影响
+unified-delay: true
+# 多 IP 并发连接，提升多解析结果站点的首连成功率
+# 不改变代理组的 URLTest/Fallback 逻辑
+tcp-concurrent: true
 
 external-controller: 0.0.0.0:9090
-external-ui: ui
-external-ui-name: zashboard
-external-ui-url: https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
 secret: "123456"
 
 # ========================
@@ -162,10 +164,21 @@ dns:
   enable: true
   listen: 0.0.0.0:7874
   ipv6: true
+  # 保留 Fake-IP，避免破坏现有基于域名的规则分流
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  # DNS 服务器域名的引导解析使用纯 IP，避免 DNS 套娃
+  # 主 DNS 改为 DoH；DNS 查询本身不再以明文 UDP 发送
   nameserver:
-    - 223.5.5.5
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  # 备用 DNS 使用 DoT，作为 DoH 异常时的加密回退
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:
+      - gfw
+  # 代理节点 server 域名单独走加密 DNS，避免节点域名解析暴露
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - +.lan
@@ -213,11 +226,35 @@ dns:
 ipv6: true
 
 # ========================
+# SNI / 域名嗅探
+# ========================
+# 作用：从 TLS/QUIC/HTTP 握手中恢复真实域名，供现有规则集分流。
+# 注意：Sniffer 是“识别 SNI”，不是“隐藏 SNI”；真正隐藏需要目标节点/服务端支持 ECH。
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  force-dns-mapping: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports:
+        - 80
+        - 8080-8880
+      override-destination: true
+    TLS:
+      ports:
+        - 443
+        - 8443
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+# ========================
 # TUN 模块
 # ========================
 tun:
   enable: true
-  stack: gvisor
+  stack: system
   device: utun
   endpoint-independent-nat: true
   auto-route: false
@@ -308,6 +345,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 50
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "^((?!(直连|拒绝)).)*$"
 
@@ -332,6 +370,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 30
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "(?=.*(港岛茶记|广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
 
@@ -356,6 +395,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 30
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "(?=.*(宝岛正妹|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
 
@@ -380,6 +420,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 30
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "(?=.*(小日本儿|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
 
@@ -404,6 +445,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 30
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "(?=.*(印加坡县|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
 
@@ -428,6 +470,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 30
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "(?=.*(泡菜欧巴|广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea)).*$"
 
@@ -452,6 +495,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 30
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "(?=.*(战争贩子|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|xicag|🇺🇸|United States)).*$"
 
@@ -476,6 +520,7 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 30
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "(?=.*(英国|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
 
@@ -500,8 +545,24 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 50
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
     filter: "^((?!(直连|拒绝|港岛茶记|广港|香港|HK|Hong Kong|🇭🇰|HongKong|宝岛正妹|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|小日本儿|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|印加坡县|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|泡菜欧巴|广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea|战争贩子|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|xicag|🇺🇸|United States|英国|伦敦|UK|United Kingdom|🇬🇧|London)).)*$"
+
+# ========================
+# TLS / ECH 说明
+# ========================
+# 1. 不在此处给全部订阅节点强制注入 ech-opts。
+#    ECH 是具体 TLS 出站的能力；目标域名需要提供 ECH 配置，且节点/服务端必须兼容。
+# 2. 对支持 ECH 的 VLESS/VMess/Trojan/AnyTLS 节点，应在节点本身配置：
+#      ech-opts:
+#        enable: true
+#    若 config 留空，mihomo 会尝试通过 DNS 获取 ECH 配置。
+# 3. 不修改现有 servername/SNI。SNI 必须与节点证书/Reality/服务端配置匹配，
+#    不能为了“伪装”而统一改成一个域名，否则容易导致 TLS/Reality 节点失效。
+# 4. client-fingerprint 属于具体节点出站配置，不在全局强制设置。
+#    推荐已有 TLS 节点优先使用 client-fingerprint: chrome。
+# 5. 上述策略保证 URLTest/Fallback 仍按原节点进行测速，不因为 ECH 配置错误整体失去节点。
 
 # ========================
 # 规则引擎（rules）
@@ -550,7 +611,7 @@ rules:
   - RULE-SET,Globe / Domain,国外  
   - RULE-SET,Direct / Domain,国内
   - RULE-SET,China / Domain,国内
-  - RULE-SET,China / IP,国内,no-resolve
+  - RULE-SET,China / IP,国内
   - RULE-SET,Private / Domain,国内
   - MATCH,其他
 
@@ -616,4 +677,3 @@ ntp:
   server: time.apple.com
   port: 123
   interval: 30
-  write-to-system: false

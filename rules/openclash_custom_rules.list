@@ -1,4 +1,5 @@
 rules:
+- DOMAIN-SUFFIX,corleom.com,DIRECT
 - DOMAIN-SUFFIX,monkeycode-ai.com,DIRECT
 - DOMAIN-SUFFIX,xn--49sq15btnijvp.xn--fiqs8s,DIRECT
 - DOMAIN-SUFFIX,haiyucloud.com,DIRECT

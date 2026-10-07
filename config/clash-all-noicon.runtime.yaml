@@ -666,6 +666,7 @@ proxy-groups:
     Wan|\U0001F1F9\U0001F1FC|\U0001F1E8\U0001F1F3|TaiWan|Taiwan|小日本儿|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|\U0001F1EF\U0001F1F5|Japan|印加坡县|广新|新加坡|SG|坡|狮城|\U0001F1F8\U0001F1EC|Singapore|泡菜欧巴|广韩|韩国|韓國|KR|首尔|春川|\U0001F1F0\U0001F1F7|Korea|战争贩子|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|xicag|\U0001F1FA\U0001F1F8|United
     States|英国|伦敦|UK|United Kingdom|\U0001F1EC\U0001F1E7|London)).)*$"
 rules:
+- DOMAIN-SUFFIX,corleom.com,DIRECT
 - DOMAIN-SUFFIX,monkeycode-ai.com,DIRECT
 - DOMAIN-SUFFIX,xn--49sq15btnijvp.xn--fiqs8s,DIRECT
 - DOMAIN-SUFFIX,haiyucloud.com,DIRECT
